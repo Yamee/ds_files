@@ -10,9 +10,11 @@ int count, pos, i=1;
 
 void create()
 {
-	int ch=1;	
+	//char ch ='y';
+	int ch=1;
 	head=0;
 	
+	//while(ch=='y')	
 	while(ch==1)
 	{
 	newnode = (struct node*)malloc(sizeof(struct node));
@@ -29,9 +31,11 @@ void create()
 		temp->next=newnode;
 		temp=newnode;
 	}
-	printf("do you want to continue(0,1)?");
+	printf("do you want to continue(yes-1/no-0)?");
 	scanf("%d", &ch);
+	//scanf("%s", &ch);
 	}
+	
 }
 		
 void insbeg()
@@ -71,14 +75,10 @@ void inspos()
 	{
 		insend();
 	}
-	else if(pos<i || pos>count)
-	{
-		printf("Invalid position, no insertion\n");
-	}
 	else
 	{
 		
-		while(i<pos)
+		while(i<pos-1)
 		{
 			temp=temp->next;
 			i++;
@@ -154,55 +154,54 @@ void main()
 	int choice;
 	do
 	{
-		printf("\nenter choice:\n1- create\n2- insbeg\n3- insend\n4- inspos\n5- delbeg\n6- delend\n7- delpos");
+		printf("\nenter choice:\n1- create(at start)\n2- insbeg\n3- insend\n4- inspos\n5- delbeg\n6- delend\n7- delpos");
 		printf("\n(1, 2, 3, 4, 5, 6, 7):");
 		scanf("%d", &choice);
 		switch(choice)
 		{
-			case '1':
+			case 1:
 				create();
 				break;
 				
-			case '2':
+			case 2:
 				insbeg();
 				break;
 				
-			case '3':
+			case 3:
 				insend();
 				break;
 				
-			case '4':
+			case 4:
 				inspos();
 				break;
 				
-			case '5':
+			case 5:
 				delbeg();
 				break;
 				
-			case '6':
+			case 6:
 				delend();
 				break;
 				
-			case '7':
+			case 7:
 				delpos();
 				break;
 				
-			//default:
-			//	printf("invalid choice!");		
+			default:
+				printf("invalid choice!\n");		
 		}
-	}while(choice!=0);
+		//display
+		temp=head;
+		while(temp!=0)
+		{	
+			count++;
+			printf("%d\t", temp->data);
+			temp = temp->next;
+		}
+		printf("\nlength is %d\n", count);
+		
+	}while(choice!=0);	
 	
-	
-	//display
-	temp=head;
-	while(temp!=0)
-	{	
-		count++;
-		printf("%d\t", temp->data);
-		temp = temp->next;
-	}
-	printf("\nlength is %d", count);	
-
 	//function defination
 	void create();
 	void insbeg();
@@ -211,6 +210,5 @@ void main()
 	void delbeg();
 	void delend();
 	void delpos();
-	
-	
+		
 }
