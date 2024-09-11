@@ -4,7 +4,7 @@ struct node
 	{
 	int data;
 	struct node*next;
-	} *head, *temp, *newnode;
+	} *head, *temp, *newnode, *nextnode, *prev, *cur;
 
 int count, pos, i=1;
 
@@ -35,7 +35,6 @@ void create()
 	scanf("%d", &ch);
 	//scanf("%s", &ch);
 	}
-	
 }
 		
 void insbeg()
@@ -149,13 +148,38 @@ void delpos()
 	}
 }
 
+void reverse()
+{
+	prev=0;
+	cur=nextnode=head;
+	while(nextnode!=0)
+	{
+		nextnode=nextnode->next;
+		cur->next=prev;
+		prev=cur;
+		cur=nextnode;
+	}
+	head=prev;
+}
+
+void display()
+{
+		temp=head;
+		while(temp!=0)
+		{	
+			count++;
+			temp = temp->next;
+		}
+		printf("\nlength is %d\n", count);
+}
+
 void main()
 {
 	int choice;
 	do
 	{
-		printf("\nenter choice:\n1- create(at start)\n2- insbeg\n3- insend\n4- inspos\n5- delbeg\n6- delend\n7- delpos");
-		printf("\n(1, 2, 3, 4, 5, 6, 7):");
+		printf("\n\nenter choice:\n1- create(at start)\n2- insbeg\n3- insend\n4- inspos\n5- delbeg\n6- delend\n7- delpos\n8- reverse\n9- display");
+		printf("\n(1, 2, 3, 4, 5, 6, 7, 8, 9):");
 		scanf("%d", &choice);
 		switch(choice)
 		{
@@ -187,19 +211,23 @@ void main()
 				delpos();
 				break;
 				
+			case 8:
+				reverse();
+				break;
+				
+			case 9:
+				display();
+				break;
+				
 			default:
 				printf("invalid choice!\n");		
 		}
-		//display
 		temp=head;
 		while(temp!=0)
-		{	
-			count++;
+		{
 			printf("%d\t", temp->data);
 			temp = temp->next;
-		}
-		printf("\nlength is %d\n", count);
-		
+		}	
 	}while(choice!=0);	
 	
 	//function defination
@@ -210,5 +238,5 @@ void main()
 	void delbeg();
 	void delend();
 	void delpos();
-		
+	void display();
 }
