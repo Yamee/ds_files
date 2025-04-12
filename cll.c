@@ -13,14 +13,16 @@ void create()
 	head=0;
 	while(ch)
 	{
+		// add some data here 
 		newnode=(struct node*)malloc(sizeof(struct node));
 		printf("Enter Data:");
 		scanf("%d", &newnode->data);
-		newnode->next=0;
 		
-		if(head==0)
-		{
-			head=tail=newnode;
+		// newnode->next=0;
+		
+		// if(head==0)
+		// {
+		// 	head=tail=newnode;
 			tail->next=head;
 		}
 		
